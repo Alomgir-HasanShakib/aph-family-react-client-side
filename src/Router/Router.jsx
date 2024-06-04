@@ -5,6 +5,7 @@ import Petlisting from "../Pages/UsersPages/Petlisting";
 import Donation from "../Pages/UsersPages/Donation";
 import Login from "../Shared/Authenticaiton/Login";
 import Registration from "../Shared/Authenticaiton/Registration";
+import Dashboard from "../Layout/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
     path: "/registration",
     element: <Registration></Registration>,
   },
+  {
+    path: 'dashboard',
+    element: <Dashboard></Dashboard>
+  }
 ]);
 
 export default router;

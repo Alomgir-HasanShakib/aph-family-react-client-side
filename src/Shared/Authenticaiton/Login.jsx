@@ -19,12 +19,21 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     googleLogin().then((res) => {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "User Login Success",
-        showConfirmButton: false,
-        timer: 1500,
+      const user = {
+        name: res.user.displayName,
+        email: res.user.email,
+        role: "admin",
+      };
+      axiosPublic.post("/users", user).then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User Register Success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       });
       navigate("/");
     });
@@ -32,12 +41,21 @@ const Login = () => {
 
   const handleGitleLogin = () => {
     gitLogin().then((res) => {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "User Login Success",
-        showConfirmButton: false,
-        timer: 1500,
+      const user = {
+        name: res.user.displayName,
+        email: res.user.email,
+        role: "user",
+      };
+      axiosPublic.post("/users", user).then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User Register Success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       });
       navigate("/");
     });
