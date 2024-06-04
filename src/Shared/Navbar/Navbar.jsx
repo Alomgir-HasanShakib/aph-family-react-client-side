@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [click, setClick] = useState(false);
   const [isuserOpen, setIsuserOpen] = useState(false);
+  const [user, setUser] = useState(false);
 
   const handleLogOut = () => {
     console.log("logout");
@@ -25,40 +26,53 @@ const Navbar = () => {
           <img src={logo} className="w-[150px]" alt="Flowbite Logo" />
         </a>
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <ul>
-            <li className="relative" onClick={() => setIsuserOpen(!isuserOpen)}>
-              <img
-                className="w-12 rounded-full"
-                src="https://static.vecteezy.com/system/resources/thumbnails/036/594/092/small_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg"
-                alt=""
-              />
-
-              <ul
-                className={` py-2 absolute bg-white mt-5 right-0 rounded-lg font-bold text-xl ${
-                  isuserOpen ? "block" : "hidden"
-                }`}
-                aria-labelledby="user-menu-button"
+          {user ? (
+            <ul>
+              <li
+                className="relative"
+                onClick={() => setIsuserOpen(!isuserOpen)}
               >
-                <li>
-                  <button className="btn px-4 py-2 text-sm text-green-500 hover:bg-gray-100 dark:hover:bg-gray-100 dark:text-gray-200 dark:hover:text-white">
-                    <Link to="/dashboard" className="flex btn items-center   ">
-                      <MdDashboard className="text-xl mr-3"></MdDashboard>{" "}
-                      Dashboard
-                    </Link>
-                  </button>
-                </li>
+                <img
+                  className="w-12 rounded-full"
+                  src="https://static.vecteezy.com/system/resources/thumbnails/036/594/092/small_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg"
+                  alt=""
+                />
 
-                <li>
-                  <button
-                    onClick={handleLogOut}
-                    className="flex btn items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    <LuLogOut className="text-xl text-red-600 mr-3" /> Sign out
-                  </button>
-                </li>
-              </ul>
-            </li>
-          </ul>
+                <ul
+                  className={` py-2 absolute bg-white mt-5 right-0 rounded-lg font-bold text-xl ${
+                    isuserOpen ? "block" : "hidden"
+                  }`}
+                  aria-labelledby="user-menu-button"
+                >
+                  <li>
+                    <button className="btn px-4 py-2 text-sm text-green-500 hover:bg-gray-100 dark:hover:bg-gray-100 dark:text-gray-200 dark:hover:text-white">
+                      <Link
+                        to="/dashboard"
+                        className="flex btn items-center   "
+                      >
+                        <MdDashboard className="text-xl mr-3"></MdDashboard>{" "}
+                        Dashboard
+                      </Link>
+                    </button>
+                  </li>
+
+                  <li>
+                    <button
+                      onClick={handleLogOut}
+                      className="flex btn items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      <LuLogOut className="text-xl text-red-600 mr-3" /> Sign
+                      out
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          ) : (
+            <button className="btn bg-blue-900 rounded-full text-slate-300 font-semibold px-5 py-2">
+              Join Community
+            </button>
+          )}
           <button
             data-collapse-toggle="navbar-user"
             type="button"
@@ -83,7 +97,7 @@ const Navbar = () => {
                   return {
                     fontWeight: isActive ? "bold" : "",
                     fontSize: isActive ? "18px" : "",
-                    color: isActive ? "green" : "",
+                    color: isActive ? "#233876" : "",
 
                     viewTransitionName: isTransitioning ? "slide" : "",
                   };
@@ -97,11 +111,11 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-              style={({ isActive, isPending, isTransitioning }) => {
+                style={({ isActive, isPending, isTransitioning }) => {
                   return {
                     fontWeight: isActive ? "bold" : "",
                     fontSize: isActive ? "18px" : "",
-                    color: isActive ? "green" : "",
+                    color: isActive ? "#233876" : "",
 
                     viewTransitionName: isTransitioning ? "slide" : "",
                   };
@@ -114,11 +128,11 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-              style={({ isActive, isPending, isTransitioning }) => {
+                style={({ isActive, isPending, isTransitioning }) => {
                   return {
                     fontWeight: isActive ? "bold" : "",
                     fontSize: isActive ? "18px" : "",
-                    color: isActive ? "green" : "",
+                    color: isActive ? "#233876" : "",
 
                     viewTransitionName: isTransitioning ? "slide" : "",
                   };

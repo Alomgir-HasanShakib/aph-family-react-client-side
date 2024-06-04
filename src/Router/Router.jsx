@@ -3,6 +3,8 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/UsersPages/Home";
 import Petlisting from "../Pages/UsersPages/Petlisting";
 import Donation from "../Pages/UsersPages/Donation";
+import Login from "../Shared/Authenticaiton/Login";
+import Registration from "../Shared/Authenticaiton/Registration";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
         element: <Donation></Donation>,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/registration",
+    element: <Registration></Registration>,
   },
 ]);
 
