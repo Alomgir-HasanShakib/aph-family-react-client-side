@@ -7,6 +7,7 @@ import {
   signOut,
   GoogleAuthProvider,
   updateProfile,
+  GithubAuthProvider,
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import app from "../../Firebase/Firebase.config";
@@ -15,6 +16,7 @@ import app from "../../Firebase/Firebase.config";
 export const AuthContext = createContext(null);
 // social media login
 const googleprovider = new GoogleAuthProvider();
+const gitprovider = new GithubAuthProvider();
 
 const Authentication = ({ children }) => {
   const auth = getAuth(app);
@@ -37,6 +39,11 @@ const Authentication = ({ children }) => {
   const googleLogin = () => {
     setLoader(true);
     return signInWithPopup(auth, googleprovider);
+  };
+  //GitLogin
+  const gitLogin = () => {
+    setLoader(true);
+    return signInWithPopup(auth, gitprovider);
   };
 
   // sign Out user
@@ -73,6 +80,7 @@ const Authentication = ({ children }) => {
     setUser,
     logOut,
     googleLogin,
+    gitLogin,
     updateUserProfile,
   };
   return (

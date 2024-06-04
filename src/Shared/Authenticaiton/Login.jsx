@@ -8,7 +8,7 @@ import { AuthContext } from "../../Context/authcontext/Authentication";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { loginUser, loader } = useContext(AuthContext);
+  const { loginUser, gitLogin, googleLogin, loader } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const {
@@ -16,6 +16,32 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const handleGoogleLogin = () => {
+    googleLogin().then((res) => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User Login Success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    });
+  };
+
+  const handleGitleLogin = () => {
+    gitLogin().then((res) => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User Login Success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    });
+  };
 
   const onSubmit = (data) => {
     const email = data.email;
@@ -60,8 +86,8 @@ const Login = () => {
             </p>
 
             <a
-              href="#"
-              className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transhtmlForm border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+              onClick={handleGoogleLogin}
+              className="flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transhtmlForm border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
             >
               <div className="px-4 py-2">
                 <svg className="w-6 h-6" viewBox="0 0 40 40">
@@ -89,8 +115,8 @@ const Login = () => {
               </span>
             </a>
             <a
-              href="#"
-              className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transhtmlForm border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+              onClick={handleGitleLogin}
+              className="flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transhtmlForm border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
             >
               <div className="px-4 py-2">
                 <FaGithub></FaGithub>
