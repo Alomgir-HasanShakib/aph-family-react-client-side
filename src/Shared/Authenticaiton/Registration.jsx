@@ -1,24 +1,72 @@
 import logo from "../../assets/logo.png";
 import loginPet from "../../assets/cat2.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaGithub } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/authcontext/Authentication";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `http://freeimage.host/api/1/upload/?key=${image_hosting_key}`;
 const Registration = () => {
-
-  const {updateUserProfile,gitLogin,googleLogin,createUser} = useContext(AuthContext)
-
+  const { updateUserProfile, gitLogin, googleLogin, createUser } =
+    useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // data.preventDefault();
-    const image = data.image[0]
-    console.log(image);
+    const name = data.name;
+    const email = data.email;
+    const pass = data.password;
+    const image = data.image[0];
+
+    const formData = new FormData();
+    formData.append("image", image);
+    await fetch(
+      "https://api.imgbb.com/1/upload?key=015334421fc290847de066edce69a4c4",
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.status === 200) {
+          const img = result.data.url;
+          const userInfo = {
+            name: name,
+            email: email,
+            image: img,
+            role: "user",
+          };
+
+          createUser(email, pass).then((res) => {
+            updateUserProfile(name, img).then((res) => {
+              axiosPublic.post("/users", userInfo).then((res) => {
+                console.log(res);
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User Register Success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  navigate("/");
+                }
+              });
+            });
+          });
+        }
+      });
   };
   return (
     <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl mt-24">
@@ -70,7 +118,7 @@ const Registration = () => {
           className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transhtmlForm border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
         >
           <div className="px-4 py-2">
-           <FaGithub></FaGithub>
+            <FaGithub></FaGithub>
           </div>
 
           <span className="w-5/6 px-4 py-3 font-bold text-center">
@@ -92,7 +140,6 @@ const Registration = () => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-
           <div className="mt-4">
             <label
               className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
@@ -105,6 +152,11 @@ const Registration = () => {
               className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="text"
             />
+            {errors.name?.type === "required" && (
+              <span className="label-text text-red-500">
+                Enter Your Full Name!
+              </span>
+            )}
           </div>
           <div className="mt-4">
             <label
@@ -119,6 +171,11 @@ const Registration = () => {
               className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="email"
             />
+            {errors.email?.type === "required" && (
+              <span className="label-text text-red-500">
+                Enter your Email!
+              </span>
+            )}
           </div>
           <div className="mt-4">
             <div className="flex justify-between">
@@ -142,14 +199,23 @@ const Registration = () => {
               type="password"
               {...register("password", { required: true })}
             />
+            {errors.password?.type === "required" && (
+              <span className="label-text text-red-500">
+                Enter Valid Password and Password Length Must be 6 charecter!
+              </span>
+            )}
           </div>
           <div className="mt-4">
-           
             <input
               {...register("image", { required: true })}
               className="block w-full px-4 py-2 text-gray-700   dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="file"
             />
+            {errors.image?.type === "required" && (
+              <span className="label-text text-red-500">
+               Please Select A Image!
+              </span>
+            )}
           </div>
 
           <div className="mt-6">
