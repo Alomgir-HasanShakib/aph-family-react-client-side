@@ -70,7 +70,7 @@ const Navbar = () => {
             </ul>
           ) : (
             <button className="btn bg-blue-900 rounded-full text-slate-300 font-semibold px-5 py-2">
-              Join Community
+              <Link to="/login"> Join Community</Link>
             </button>
           )}
           <button
