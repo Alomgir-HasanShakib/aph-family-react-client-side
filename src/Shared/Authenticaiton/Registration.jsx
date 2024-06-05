@@ -8,8 +8,6 @@ import { AuthContext } from "../../Context/authcontext/Authentication";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api = `http://freeimage.host/api/1/upload/?key=${image_hosting_key}`;
 const Registration = () => {
   const { updateUserProfile, gitLogin, googleLogin, createUser, loader } =
     useContext(AuthContext);

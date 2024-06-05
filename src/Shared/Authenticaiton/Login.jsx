@@ -22,7 +22,7 @@ const Login = () => {
       const user = {
         name: res.user.displayName,
         email: res.user.email,
-        role: "admin",
+        role: "user",
       };
       axiosPublic.post("/users", user).then((res) => {
         if (res.data.insertedId) {
