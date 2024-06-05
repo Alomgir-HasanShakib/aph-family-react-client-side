@@ -11,9 +11,14 @@ import { AuthContext } from "../Context/authcontext/Authentication";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const {user} = useContext(AuthContext)
+  const { user, loader } = useContext(AuthContext);
   const navlink = (
     <>
+      <li>
+        <Link to="/" className="flex items-center gap-3 hover:text-blue-800  ">
+          <FaHome className="text-xl"></FaHome> Home
+        </Link>
+      </li>
       <li>
         <NavLink
           style={({ isActive, isPending, isTransitioning }) => {
@@ -28,7 +33,7 @@ const Dashboard = () => {
             };
           }}
           to="/dashboard/addpet"
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 hover:text-blue-800 "
         >
           <IoAddCircle className="text-xl"></IoAddCircle> Add a Pet
         </NavLink>
@@ -47,7 +52,7 @@ const Dashboard = () => {
             };
           }}
           to="/dashboard/myaddedpet"
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 hover:text-blue-800 "
         >
           <GoChecklist className="text-xl" /> My Added Pets
         </NavLink>
@@ -66,7 +71,7 @@ const Dashboard = () => {
             };
           }}
           to="/dashboard/adoptrequest"
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 hover:text-blue-800 "
         >
           <LiaHandshake className="text-xl" /> Adoption Request
         </NavLink>
@@ -85,7 +90,7 @@ const Dashboard = () => {
             };
           }}
           to="/dashboard/donationcampaign"
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 hover:text-blue-800 "
         >
           <IoCreateOutline className="text-xl" />
           Create Donation Campaign
@@ -105,7 +110,7 @@ const Dashboard = () => {
             };
           }}
           to="/dashboard/mycampaign"
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 hover:text-blue-800 "
         >
           <MdCampaign className="text-xl" /> My Donation Campaigns
         </NavLink>
@@ -124,7 +129,7 @@ const Dashboard = () => {
             };
           }}
           to="/dashboard/mydonation"
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 hover:text-blue-800 "
         >
           <FaDonate className="text-xl" />
           My Donations
@@ -133,48 +138,69 @@ const Dashboard = () => {
     </>
   );
   return (
-    <div className="flex gap-10 font-sans bg-[#F6F6F6]">
-      <div>
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="text-2xl font-extrabold mt-5 bg-white lg:hidden"
-        >
-          <AiOutlineMenuUnfold />
-        </button>
-        <div
-          className={`w-72 h-screen bg-white ${
-            isOpen ? "block" : "hidden"
-          } lg:block`}
-        >
-          <div className="  flex flex-col justify-center items-center pt-5 pb-5  gap-3">
-            <img
-              className=" object-cover w-16 h-16 mx-2 rounded-full"
-              src={user?.photoURL}
-              alt="user Image"
-            />
-            <h3 className="text-blue-900 font-medium">{user?.displayName || "Anonymous"}</h3>
-            
-          </div>
-          <hr className=""/>
-          <ul className="menu p-4 md:pt-10 font-medium text-blue-900 space-y-10">
-            {navlink}
-          </ul>
+    <>
+      {loader ? (
+        <div className="flex items-center  min-h-screen">
+          <div className="flex  w-full  min-h-screen  mx-auto overflow-hidden bg-white rounded-lg shadow-lg animate-pulse dark:bg-gray-800">
+            <div className="w-1/3 bg-gray-300 dark:bg-gray-600"></div>
 
-          <Link
-            to="/"
-            className="btn hover:text-slate-400 bottom-10 md:bottom-16 absolute text-blue-900  px-5 text-xl max-w-56  flex gap-3 items-center left-5"
-          >
-            Back to Home <FaArrowRight></FaArrowRight>
-          </Link>
-          <button className="btn hover:text-red-600 bottom-0 md:bottom-3 absolute text-blue-900  px-5 text-xl max-w-40  flex gap-3 items-center left-5">
-            Log Out<MdLogout></MdLogout>
-          </button>
+            <div className="w-2/3 p-4 md:p-4">
+              <h1 className="w-40 h-2 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
+
+              <p className="w-48 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+
+              <div className="flex mt-4 item-center gap-x-2">
+                <p className="w-5 h-2 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+                <p className="w-5 h-2 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+                <p className="w-5 h-2 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+                <p className="w-5 h-2 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+                <p className="w-5 h-2 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              </div>
+
+              <div className="flex justify-between mt-6 item-center">
+                <h1 className="w-10 h-2 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
+
+                <div className="h-4 bg-gray-200 rounded-lg w-28 dark:bg-gray-700"></div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-        <Outlet></Outlet>
-      </div>
-    </div>
+      ) : (
+        <div className="flex md:gap-10 font-sans bg-[#F6F6F6]">
+          <div>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-2xl font-extrabold mt-5 bg-white lg:hidden"
+            >
+              <AiOutlineMenuUnfold />
+            </button>
+            <div
+              className={`w-72 min-h-screen bg-white ${
+                isOpen ? "block" : "hidden"
+              } lg:block`}
+            >
+              <div className="  flex flex-col justify-center items-center pt-5 pb-5  gap-4">
+                <img
+                  className=" object-cover w-16 h-16 mx-2 rounded-full"
+                  src={user?.photoURL}
+                  alt="user Image"
+                />
+                <h3 className="text-blue-900 font-medium">
+                  {user?.displayName || "Anonymous"}
+                </h3>
+              </div>
+              <hr className="" />
+              <ul className="menu p-4 md:pt-10 font-medium text-blue-900 space-y-10">
+                {navlink}
+              </ul>
+            </div>
+          </div>
+          <div className={`flex-1 ${isOpen ? "hidden" : "block"} md:block`}>
+            <Outlet></Outlet>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
