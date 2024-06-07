@@ -1,3 +1,4 @@
+
 import { useForm } from "react-hook-form";
 import Title from "../../../Components/DashBoardSectionTItle/Title";
 
@@ -6,10 +7,14 @@ import JoditEditor from "jodit-react";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Context/authcontext/Authentication";
+import { useLoaderData, useParams } from "react-router-dom";
 
-const AddPet = () => {
+const UpdatePets = () => {
+      const data = useLoaderData()
+      const {id} = useParams()
+      console.log(id, '=====================', data);
   const axiosPublic = useAxiosPublic();
-  const {loader,setLoader,user} = useContext(AuthContext)
+  const { loader, setLoader, user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -30,11 +35,10 @@ const AddPet = () => {
     const image = data.image[0];
     const category = data.category;
     const long = para.split("<")[0];
-
     const formData = new FormData();
     formData.append("image", image);
 
-    setLoader(true)
+    setLoader(true);
     const imgRes = await axiosPublic.post(
       "https://api.imgbb.com/1/upload?key=015334421fc290847de066edce69a4c4",
       formData
@@ -52,7 +56,7 @@ const AddPet = () => {
         date: new Date(),
         adopted: false,
         long: long,
-        user: user?.email
+        user: user?.email,
       };
       const petRes = await axiosPublic.post("/pets", result);
       if (petRes.data.insertedId) {
@@ -64,16 +68,15 @@ const AddPet = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        setLoader(false)
+        setLoader(false);
       }
     }
   };
-
   return (
     <div className="px-4 mt-24 md:mb-5">
       <Title
-        head="List Down Here for give them better life"
-        subHead="Have Any Pet ?"
+        head="Want To Update Pet Information"
+        subHead="Update here !"
       ></Title>
       {loader ? (
         <div className="w-full max-w-md mx-auto animate-pulse p-9">
@@ -243,4 +246,4 @@ const AddPet = () => {
   );
 };
 
-export default AddPet;
+export default UpdatePets;

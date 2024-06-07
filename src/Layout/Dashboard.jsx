@@ -139,6 +139,12 @@ const Dashboard = () => {
   );
   return (
     <>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="text-2xl font-extrabold mt-5 bg-white lg:hidden"
+      >
+        <AiOutlineMenuUnfold />
+      </button>
       {loader ? (
         <div className="flex items-center  min-h-screen">
           <div className="flex  w-full  min-h-screen  mx-auto overflow-hidden bg-white rounded-lg shadow-lg animate-pulse dark:bg-gray-800">
@@ -168,14 +174,8 @@ const Dashboard = () => {
       ) : (
         <div className="flex md:gap-10 font-sans bg-[#F6F6F6]">
           <div>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-2xl font-extrabold mt-5 bg-white lg:hidden"
-            >
-              <AiOutlineMenuUnfold />
-            </button>
             <div
-              className={`w-72 min-h-screen bg-white ${
+              className={`max-w-72 min-h-screen bg-white ${
                 isOpen ? "block" : "hidden"
               } lg:block`}
             >
@@ -195,7 +195,7 @@ const Dashboard = () => {
               </ul>
             </div>
           </div>
-          <div className={`flex-1 ${isOpen ? "hidden" : "block"} md:block`}>
+          <div className={`flex-1 ${isOpen ? "hidden" : ""} `}>
             <Outlet></Outlet>
           </div>
         </div>

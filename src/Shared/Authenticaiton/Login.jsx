@@ -6,10 +6,12 @@ import { FaGithub } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/authcontext/Authentication";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
   const { loginUser, gitLogin, googleLogin, loader } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const {
     register,
