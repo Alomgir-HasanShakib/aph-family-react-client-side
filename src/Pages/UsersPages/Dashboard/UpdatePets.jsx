@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import Title from "../../../Components/DashBoardSectionTItle/Title";
 
@@ -10,9 +9,9 @@ import { AuthContext } from "../../../Context/authcontext/Authentication";
 import { useLoaderData, useParams } from "react-router-dom";
 
 const UpdatePets = () => {
-      const data = useLoaderData()
-      const {id} = useParams()
-      console.log(id, '=====================', data);
+  const pet = useLoaderData();
+  const { id } = useParams();
+  console.log(id);
   const axiosPublic = useAxiosPublic();
   const { loader, setLoader, user } = useContext(AuthContext);
   const {
@@ -52,19 +51,17 @@ const UpdatePets = () => {
         locaiton: location,
         shortDescription: shortDescription,
         image: image,
-        category: category,
-        date: new Date(),
         adopted: false,
+        category: category,
         long: long,
-        user: user?.email,
       };
-      const petRes = await axiosPublic.post("/pets", result);
-      if (petRes.data.insertedId) {
+      const petRes = await axiosPublic.patch(`/pets/${id}`, result);
+      if (petRes.data.modifiedCount > 0) {
         reset();
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Pet Added",
+          title: "Pet information Updated",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -106,6 +103,7 @@ const UpdatePets = () => {
                   <input
                     id="petname"
                     type="text"
+                    defaultValue={pet.name}
                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                     {...register("petname", { required: true })}
                   />
@@ -125,6 +123,7 @@ const UpdatePets = () => {
                   </label>
                   <input
                     type="number"
+                    defaultValue={pet.age}
                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                     {...register("age", { required: true })}
                   />
@@ -142,7 +141,7 @@ const UpdatePets = () => {
                     </div>
                     <select
                       {...register("category", { required: true })}
-                      defaultValue="select"
+                      defaultValue={pet.category}
                       className="select select-bordered w-full"
                     >
                       <option disabled value="select">
@@ -170,6 +169,7 @@ const UpdatePets = () => {
                   </label>
                   <input
                     type="text"
+                    defaultValue={pet.locaiton}
                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                     {...register("location", { required: true })}
                   />
@@ -188,6 +188,7 @@ const UpdatePets = () => {
                   </label>
                   <input
                     type="text"
+                    defaultValue={pet.shortDescription}
                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                     {...register("description", { required: true })}
                   />
@@ -203,6 +204,7 @@ const UpdatePets = () => {
                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white  rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                     {...register("image", { required: true })}
                   />
+
                   {errors.image?.type === "required" && (
                     <span className="label-text text-red-500">
                       This field is required!
@@ -234,7 +236,7 @@ const UpdatePets = () => {
               <div className="flex justify-end mt-6">
                 <input
                   type="submit"
-                  value="Add Pet"
+                  value="Update Pet Info"
                   className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
                 />
               </div>

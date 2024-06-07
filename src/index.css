@@ -12,5 +12,9 @@ body {
   visibility: hidden;
 }
 .gdBOih{
-  min-height: 0;
+  min-width: 0;
+}
+.gjoprN{
+  padding-left: 0;
+  padding-right: 0;
 }

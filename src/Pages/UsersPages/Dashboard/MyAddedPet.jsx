@@ -92,7 +92,7 @@ const MyAddedPet = () => {
     {
       name: "Action",
       cell: (row) => (
-        <div className="flex flex-col">
+        <div className="flex  flex-col  gap-2">
           <Link
             to={`/dashboard/updatePet/${row._id}`}
             className="btn bg-blue-900 px-3 text-white rounded-lg py-3"
@@ -118,7 +118,7 @@ const MyAddedPet = () => {
 
   return (
     <>
-      <div className="bg-blue-900 mb-24 p-5 max-w-[90%]">
+      <div className="bg-blue-900 mb-24 p-5 max-w-[90%] hidden md:block">
         <h2 className=" font-bold text-white md:text-3xl text-center">
           My Added Pets
         </h2>
