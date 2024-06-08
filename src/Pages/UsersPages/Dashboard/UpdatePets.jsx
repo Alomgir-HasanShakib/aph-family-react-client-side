@@ -7,6 +7,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Context/authcontext/Authentication";
 import { useLoaderData, useParams } from "react-router-dom";
+import DynamicTitle from "../../../Components/HelmetForTitle/DynamicTitle";
 
 const UpdatePets = () => {
   const pet = useLoaderData();
@@ -71,6 +72,7 @@ const UpdatePets = () => {
   };
   return (
     <div className="px-4 mt-24 md:mb-5">
+        <DynamicTitle title='DashBoard | Update Pets Info'></DynamicTitle>
       <Title
         head="Want To Update Pet Information"
         subHead="Update here !"

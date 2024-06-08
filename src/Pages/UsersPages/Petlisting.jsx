@@ -4,6 +4,7 @@ import PetCard from "../../Components/PetCard/PetCard";
 import { Dropdown, DropdownItem } from "flowbite-react";
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
+import DynamicTitle from "../../Components/HelmetForTitle/DynamicTitle";
 
 const Petlisting = () => {
   const [pets] = usePets();
@@ -16,6 +17,7 @@ const Petlisting = () => {
   // const searchFilter = filterData.filter(pet => pet.name.toLowerCase().includes(query))
   return (
     <div>
+      <DynamicTitle title='Pet List'></DynamicTitle>
       <div
         className="bg-cover bg-center h-[800px]"
         style={{ backgroundImage: `url(${banner})` }}

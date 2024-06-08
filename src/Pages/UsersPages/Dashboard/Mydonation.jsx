@@ -1,7 +1,10 @@
+import DynamicTitle from "../../../Components/HelmetForTitle/DynamicTitle"
 
 const Mydonation = () => {
   return (
-    <div>Mydonation</div>
+    <div>
+        <DynamicTitle title='DashBoard | My Donation'></DynamicTitle>
+      Mydonation</div>
   )
 }
 

@@ -14,6 +14,8 @@ import MydonationCampaign from "../Pages/UsersPages/Dashboard/MydonationCampaign
 import Mydonation from "../Pages/UsersPages/Dashboard/Mydonation";
 import Error from "../Pages/ErrorPages/Error";
 import UpdatePets from "../Pages/UsersPages/Dashboard/UpdatePets";
+import PetDetails from "../Pages/UsersPages/PetDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,16 @@ const router = createBrowserRouter([
       {
         path: "/donation",
         element: <Donation></Donation>,
+      },
+      {
+        path: "/petdetails/:id",
+        element: (
+          <PrivateRoute>
+            <PetDetails></PetDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/pets/${params.id}`),
       },
     ],
   },

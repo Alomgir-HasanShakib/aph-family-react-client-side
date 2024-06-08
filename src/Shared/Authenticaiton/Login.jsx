@@ -1,17 +1,20 @@
 import logo from "../../assets/logo.png";
 import loginPet from "../../assets/2.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaGithub } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/authcontext/Authentication";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import DynamicTitle from "../../Components/HelmetForTitle/DynamicTitle";
 
 const Login = () => {
   const { loginUser, gitLogin, googleLogin, loader } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
   const axiosPublic = useAxiosPublic();
+  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -37,7 +40,7 @@ const Login = () => {
           });
         }
       });
-      navigate("/");
+      navigate(from, { replace: true });
     });
   };
 
@@ -59,7 +62,7 @@ const Login = () => {
           });
         }
       });
-      navigate("/");
+      navigate(from, { replace: true });
     });
   };
 
@@ -74,12 +77,13 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      navigate("/");
+      navigate(from, { replace: true });
     });
   };
 
   return (
     <>
+      <DynamicTitle title="Login"></DynamicTitle>
       {loader ? (
         <div className="w-full max-w-md mx-auto animate-pulse p-9">
           <h1 className="h-2 bg-gray-300 rounded-lg w-52 dark:bg-gray-600"></h1>

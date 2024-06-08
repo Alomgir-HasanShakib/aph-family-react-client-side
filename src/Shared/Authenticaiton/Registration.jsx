@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Context/authcontext/Authentication";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import DynamicTitle from "../../Components/HelmetForTitle/DynamicTitle";
 
 const Registration = () => {
   const { updateUserProfile, gitLogin, googleLogin, createUser, loader } =
@@ -112,6 +113,7 @@ const Registration = () => {
   };
   return (
     <>
+      <DynamicTitle title="Registration"></DynamicTitle>
       {loader ? (
         <div className="w-full max-w-md mx-auto animate-pulse p-9">
           <h1 className="h-2 bg-gray-300 rounded-lg w-52 dark:bg-gray-600"></h1>

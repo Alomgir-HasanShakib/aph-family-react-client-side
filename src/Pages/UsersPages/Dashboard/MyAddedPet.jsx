@@ -5,6 +5,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/authcontext/Authentication";
+import DynamicTitle from "../../../Components/HelmetForTitle/DynamicTitle";
 const MyAddedPet = () => {
   const { user } = useContext(AuthContext);
   const [pets, refetch] = usePets();
@@ -121,6 +122,7 @@ const MyAddedPet = () => {
 
   return (
     <>
+      <DynamicTitle title='DashBoard | My Added Pets'></DynamicTitle>
       <div className="bg-blue-900 mb-24 p-5 max-w-[90%] hidden md:block">
         <h2 className=" font-bold text-white md:text-3xl text-center">
           My Added Pets

@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import { LiaHandshake } from "react-icons/lia";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { AuthContext } from "../Context/authcontext/Authentication";
+import Nav from "../Shared/Navbar/Nav";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -172,6 +173,8 @@ const Dashboard = () => {
           </div>
         </div>
       ) : (
+        <>
+       <Nav></Nav>
         <div className="flex md:gap-10 font-sans bg-[#F6F6F6]">
           <div>
             <div
@@ -199,6 +202,7 @@ const Dashboard = () => {
             <Outlet></Outlet>
           </div>
         </div>
+        </>
       )}
     </>
   );

@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
 import { useContext } from "react";
 import { AuthContext } from "../Context/authcontext/Authentication";
+import Nav from "../Shared/Navbar/Nav";
 
 const MainLayout = () => {
   const { loader } = useContext(AuthContext);
@@ -20,7 +20,7 @@ const MainLayout = () => {
         </div>
       ) : (
         <>
-          <Navbar></Navbar>
+          <Nav></Nav>
           <div className="min-h-[calc(100vh-130px)]  mb-10">
             <Outlet></Outlet>
           </div>

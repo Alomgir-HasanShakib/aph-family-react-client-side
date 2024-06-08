@@ -6,6 +6,7 @@ import JoditEditor from "jodit-react";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Context/authcontext/Authentication";
+import DynamicTitle from "../../../Components/HelmetForTitle/DynamicTitle";
 
 const AddPet = () => {
   const axiosPublic = useAxiosPublic();
@@ -71,6 +72,7 @@ const AddPet = () => {
 
   return (
     <div className="px-4 mt-24 md:mb-5">
+      <DynamicTitle title='DashBoard | Add Pet'></DynamicTitle>
       <Title
         head="List Down Here for give them better life"
         subHead="Have Any Pet ?"
