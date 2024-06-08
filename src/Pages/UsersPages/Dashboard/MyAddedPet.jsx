@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import usePets from "../../../hooks/usePets";
 import DataTable from "react-data-table-component";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Context/authcontext/Authentication";
 const MyAddedPet = () => {
+  const { user } = useContext(AuthContext);
   const [pets, refetch] = usePets();
+  const filterPets = pets.filter((pet) => pet.user === user?.email);
   const axiosPublic = useAxiosPublic();
 
   const updateAdoptionStatus = async (id) => {
@@ -127,7 +130,7 @@ const MyAddedPet = () => {
       <div className="overflow-x-scroll max-w-[90%]">
         <DataTable
           columns={columns}
-          data={pets}
+          data={filterPets}
           pagination
           paginationPerPage={10}
           paginationIconFirstPage
