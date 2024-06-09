@@ -11,7 +11,7 @@ const MyAddedPet = () => {
   const { user } = useContext(AuthContext);
   const [pets, refetch] = usePets();
   const filterPets = pets.filter((pet) => pet.user === user?.email);
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
 
   const updateAdoptionStatus = async (id) => {
     console.log(id);
@@ -123,7 +123,7 @@ const MyAddedPet = () => {
 
   return (
     <>
-      <DynamicTitle title='DashBoard | My Added Pets'></DynamicTitle>
+      <DynamicTitle title="DashBoard | My Added Pets"></DynamicTitle>
       <div className="bg-blue-900 mb-24 p-5 max-w-[90%] hidden md:block">
         <h2 className=" font-bold text-white md:text-3xl text-center">
           My Added Pets

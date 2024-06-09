@@ -34,10 +34,12 @@ const PetDetails = () => {
     const adoptInfo = {
       userName: user?.displayName,
       userEmail: user?.email,
+      host: pet?.user,
       phoneNumber: number,
       address: address,
       petName: petName,
       petID: petId,
+      status: "pending",
       petImage: petImage,
     };
     const adoptRes = await axiosSecure.post("/adoptRequest", adoptInfo);

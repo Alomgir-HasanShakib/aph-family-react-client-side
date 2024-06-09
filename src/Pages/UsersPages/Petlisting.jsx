@@ -10,14 +10,16 @@ const Petlisting = () => {
   const [pets] = usePets();
   const [filterPets, setFilterPets] = useState("All");
   const [query, setQuery] = useState("");
+  // this filter for will give only not Adopted pet 
+  const notAdoptedData = pets.filter((pet) => pet.adopted === false);
 
-  const filterData = pets.filter(
+  const filterData = notAdoptedData.filter(
     (pets) => filterPets === "All" || pets.category.toLowerCase() === filterPets
   );
-  // const searchFilter = filterData.filter(pet => pet.name.toLowerCase().includes(query))
+
   return (
     <div>
-      <DynamicTitle title='Pet List'></DynamicTitle>
+      <DynamicTitle title="Pet List"></DynamicTitle>
       <div
         className="bg-cover bg-center h-[800px]"
         style={{ backgroundImage: `url(${banner})` }}
