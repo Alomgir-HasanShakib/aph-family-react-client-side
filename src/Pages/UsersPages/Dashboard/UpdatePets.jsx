@@ -4,6 +4,7 @@ import Title from "../../../Components/DashBoardSectionTItle/Title";
 import { useContext, useRef, useState } from "react";
 import JoditEditor from "jodit-react";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Context/authcontext/Authentication";
 import { useLoaderData, useParams } from "react-router-dom";
@@ -14,6 +15,7 @@ const UpdatePets = () => {
   const { id } = useParams();
   console.log(id);
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure()
   const { loader, setLoader, user } = useContext(AuthContext);
   const {
     register,
@@ -56,7 +58,7 @@ const UpdatePets = () => {
         category: category,
         long: long,
       };
-      const petRes = await axiosPublic.patch(`/pets/${id}`, result);
+      const petRes = await useAxiosSecure.patch(`/pets/${id}`, result);
       if (petRes.data.modifiedCount > 0) {
         reset();
         Swal.fire({

@@ -73,12 +73,12 @@ const Authentication = ({ children }) => {
         // save jwt token
         axiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
-            localStorage.setItem("aph-access-token", res.data.token);
+            localStorage.setItem("aph-token", res.data.token);
           }
         });
       } else {
         // remove jwt token
-        localStorage.removeItem("aph-access-token");
+        localStorage.removeItem("aph-token");
       }
     });
 

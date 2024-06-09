@@ -12,8 +12,8 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
   axiosSecure.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem("aph-access-token");
-      config.headers.authorization = `aph-access-token ${token}`;
+      const token = localStorage.getItem("aph-token");
+      config.headers.authorization = `aph-token ${token}`;
       return config;
     },
     (err) => {

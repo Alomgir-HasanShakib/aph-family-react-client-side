@@ -6,8 +6,13 @@ import { Button, Modal } from "flowbite-react";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/authcontext/Authentication";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const PetDetails = () => {
+  // const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -20,12 +25,31 @@ const PetDetails = () => {
   const { user } = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const number = data.number;
     const address = data.address;
-  const petName = name
-  const petId = _id
-  const petImage = image
+    const petName = name;
+    const petId = _id;
+    const petImage = image;
+    const adoptInfo = {
+      userName: user?.displayName,
+      userEmail: user?.email,
+      phoneNumber: number,
+      address: address,
+      petName: petName,
+      petID: petId,
+      petImage: petImage,
+    };
+    const adoptRes = await axiosSecure.post("/adoptRequest", adoptInfo);
+    if (adoptRes.data.insertedId) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Pet Adoption Request Sent",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
   return (
@@ -57,9 +81,6 @@ const PetDetails = () => {
                 Age: {age}
               </h1>
             </div>
-            {/* <button className="px-2 w-full mt-10 py-3  font-bold text-white uppercase transition-colors duration-300 transform bg-blue-900 rounded dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600 text-xl">
-              Adopt
-            </button> */}
             <Button
               onClick={() => setOpenModal(true)}
               className="px-2 w-full mt-10 py-3  font-bold text-white uppercase transition-colors duration-300 transform bg-blue-900 rounded dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600 text-xl"
@@ -124,7 +145,7 @@ const PetDetails = () => {
                           />
                           {errors.address?.type === "required" && (
                             <span className="label-text text-red-500">
-                              Enter Email!
+                              Enter address!
                             </span>
                           )}
                         </div>
@@ -144,7 +165,7 @@ const PetDetails = () => {
                           />
                           {errors.number?.type === "required" && (
                             <span className="label-text text-red-500">
-                              Enter Email!
+                              Enter Phone number!
                             </span>
                           )}
                         </div>
