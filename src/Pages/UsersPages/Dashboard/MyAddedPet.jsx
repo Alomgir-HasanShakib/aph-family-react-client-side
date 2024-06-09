@@ -6,11 +6,12 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/authcontext/Authentication";
 import DynamicTitle from "../../../Components/HelmetForTitle/DynamicTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const MyAddedPet = () => {
   const { user } = useContext(AuthContext);
   const [pets, refetch] = usePets();
   const filterPets = pets.filter((pet) => pet.user === user?.email);
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure()
 
   const updateAdoptionStatus = async (id) => {
     console.log(id);
@@ -18,7 +19,7 @@ const MyAddedPet = () => {
       adopted: true,
     };
 
-    const updateRes = await axiosPublic.put(`/pets/${id}`, status);
+    const updateRes = await axiosSecure.put(`/pets/${id}`, status);
     if (updateRes.data.modifiedCount > 0) {
       Swal.fire({
         position: "top-end",
@@ -42,7 +43,7 @@ const MyAddedPet = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const deleteRes = await axiosPublic.delete(`/pets/${id}`);
+        const deleteRes = await axiosSecure.delete(`/pets/${id}`);
         if (deleteRes.data.deletedCount > 0) {
           Swal.fire({
             title: "Deleted!",

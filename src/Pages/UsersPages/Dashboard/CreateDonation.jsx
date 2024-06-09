@@ -1,28 +1,62 @@
+import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import DynamicTitle from "../../../Components/HelmetForTitle/DynamicTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useContext } from "react";
+import { AuthContext } from "../../../Context/authcontext/Authentication";
 
 const CreateDonation = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
+  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic()
 
-  const handleCampaignSubmit = (data) => {
+  const {user} = useContext(AuthContext)
+
+  const handleCampaignSubmit = async (data) => {
     const image = data.image[0];
     const totalAmount = parseInt(data.totalAmount);
     const lastDate = data.lastDate;
     const shortDescription = data.shortDescription;
     const longDescription = data.longDescription;
-    const campaignData = {
-      image: image,
-      totalAmount: totalAmount,
-      lastDate: lastDate,
-      shortDescription: shortDescription,
-      longDescription: longDescription,
-      campaignStart: new Date(),
-    };
-    console.log(campaignData);
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const imgRes = await axiosPublic.post(
+      "https://api.imgbb.com/1/upload?key=015334421fc290847de066edce69a4c4",
+      formData
+    );
+
+    if (imgRes.data.success) {
+      const image = imgRes.data.data.display_url;
+      const campaignData = {
+        image: image,
+        totalAmount: totalAmount,
+        lastDate: lastDate,
+        shortDescription: shortDescription,
+        longDescription: longDescription,
+        campaignStart: new Date(),
+        user: user?.email
+      };
+
+      const campaignRes = await axiosSecure.post("/campaigns", campaignData);
+      if (campaignRes.data.insertedId) {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Campaign Created",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
   };
 
   return (
