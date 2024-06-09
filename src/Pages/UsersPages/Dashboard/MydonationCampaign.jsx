@@ -35,9 +35,9 @@ const MydonationCampaign = () => {
     const isPause = {
       isPause: pauseStatus,
     };
-    const pauseRes = await axiosSecure.put(`/campaigns/${id}`, isPause);
+    const pauseRes = await axiosSecure.patch(`/campaigns/${id}`, isPause);
     if (pauseRes.data.modifiedCount > 0) {
-      if(pauseStatus === true){
+      if (pauseStatus === true) {
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -45,7 +45,7 @@ const MydonationCampaign = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-      }else{
+      } else {
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -54,8 +54,6 @@ const MydonationCampaign = () => {
           timer: 1500,
         });
       }
-     
-     
     }
     refetch();
   };
@@ -71,6 +69,9 @@ const MydonationCampaign = () => {
               <TableHeadCell>Max.Donation Amount</TableHeadCell>
               <TableHeadCell>Donation Progress Bar</TableHeadCell>
               <TableHeadCell>Action</TableHeadCell>
+              <TableHeadCell>
+                <span className="sr-only">Edit</span>
+              </TableHeadCell>
             </TableHead>
             <TableBody className="divide-y">
               {mydonationCampaign.map((data) => (
@@ -88,9 +89,12 @@ const MydonationCampaign = () => {
                   </TableCell>
                   <TableCell>
                     <div className="flex md:flex-row flex-col gap-3 text-xl">
-                      <button className="btn text-white px-3 py-2 rounded-full bg-blue-900">
+                      <Link
+                        to={`/dashboard/updateCampaign/${data._id}`}
+                        className="btn text-white px-3 py-2 rounded-full bg-blue-900"
+                      >
                         <FiEdit />
-                      </button>
+                      </Link>
                       <button
                         onClick={() => handleIsPause(data._id)}
                         className="btn text-white px-3 py-2 rounded-full bg-green-500"
