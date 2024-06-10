@@ -18,8 +18,10 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "flowbite-react";
+import useAdmin from "../../hooks/useAdmin";
 
 const Nav = () => {
+  const [isAdmin] = useAdmin();
   const { user, logOut } = useContext(AuthContext);
   // const [isOpen, setIsOpen] = useState(false);
   // const [click, setClick] = useState(false);
@@ -105,9 +107,17 @@ const Nav = () => {
             inline
             label={<Avatar alt="User settings" img={user?.photoURL} rounded />}
           >
-            <DropdownItem>
-              <Link to="/dashboard/addpet">Dashboard</Link>
-            </DropdownItem>
+            {isAdmin ? (
+              <>
+                <DropdownItem>
+                  <Link to="/dashboard/allusers">Admin Dashboard</Link>
+                </DropdownItem>
+              </>
+            ) : (
+              <DropdownItem>
+                <Link to="/dashboard/addpet">Dashboard</Link>
+              </DropdownItem>
+            )}
             <DropdownDivider />
             <DropdownItem onClick={handleLogOut}>Sign out</DropdownItem>
           </Dropdown>

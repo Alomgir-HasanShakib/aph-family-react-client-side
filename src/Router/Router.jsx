@@ -18,6 +18,10 @@ import PetDetails from "../Pages/UsersPages/PetDetails";
 import PrivateRoute from "./PrivateRoute";
 import UpdateDonation from "../Pages/UsersPages/Dashboard/UpdateDonation";
 import DonationDetails from "../Pages/UsersPages/DonationDetails";
+import AllUsers from "../Pages/AdminPages/AllUsers";
+import AdminRoute from "./AdminRoute";
+import AllPets from "../Pages/AdminPages/AllPets";
+import AllDonators from "../Pages/AdminPages/AllDonators";
 
 const router = createBrowserRouter([
   {
@@ -107,6 +111,31 @@ const router = createBrowserRouter([
       {
         path: "mydonation",
         element: <Mydonation></Mydonation>,
+      },
+      // ======================================admin route here=================================================
+      {
+        path: "allusers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "allpets",
+        element: (
+          <AdminRoute>
+            <AllPets></AllPets>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "alldonators",
+        element: (
+          <AdminRoute>
+            <AllDonators></AllDonators>
+          </AdminRoute>
+        ),
       },
     ],
   },
