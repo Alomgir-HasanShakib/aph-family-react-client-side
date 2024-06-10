@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/authcontext/Authentication";
 import Swal from "sweetalert2";
 
-const CheckOut = ({ amount, id }) => {
+const CheckOut = ({ amount, id, totalAmount }) => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
@@ -90,32 +90,35 @@ const CheckOut = ({ amount, id }) => {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement
-        className="border border-b-blue-900 py-3 px-5 mb-8"
-        options={{
-          style: {
-            base: {
-              fontSize: "16px",
-              color: "#424770",
-              "::placeholder": {
-                color: "#aab7c4",
+    <>
+      <form onSubmit={handleSubmit}>
+        <CardElement
+          className="border border-b-blue-900 py-3 px-5 mb-8"
+          options={{
+            style: {
+              base: {
+                fontSize: "16px",
+                color: "#424770",
+                "::placeholder": {
+                  color: "#aab7c4",
+                },
+              },
+              invalid: {
+                color: "#9e2146",
               },
             },
-            invalid: {
-              color: "#9e2146",
-            },
-          },
-        }}
-      />
-      <button
-        type="submit"
-        className="bg-blue-900 px-4 py-2 rounded-lg text-white"
-        disabled={!stripe || !clientSecret}
-      >
-        Donate
-      </button>
-    </form>
+          }}
+        />
+
+        <button
+          type="submit"
+          className="bg-blue-900 px-4 py-2 rounded-lg text-white"
+          disabled={!stripe || !clientSecret}
+        >
+          Donate
+        </button>
+      </form>
+    </>
   );
 };
 

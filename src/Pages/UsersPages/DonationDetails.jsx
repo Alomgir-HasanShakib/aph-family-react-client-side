@@ -31,9 +31,6 @@ const DonationDetails = () => {
   // recreating the `Stripe` object on every render.
   const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
-  const handleDonate = () => {
-    
-  };
 
   return (
     <div>
@@ -83,7 +80,7 @@ const DonationDetails = () => {
                     show={openModal}
                     onClose={() => setOpenModal(false)}
                   >
-                    <Modal.Header>Enter Your Information</Modal.Header>
+                    <Modal.Header>Please Donate less Then ${totalAmount}</Modal.Header>
                     <Modal.Body>
                       <div className="space-y-6">
                         <form onChange={(e) => setAmount(e.target.value)}>
@@ -103,7 +100,7 @@ const DonationDetails = () => {
                           </div>
                         </form>
                         <Elements stripe={stripePromise}>
-                          <CheckOut amount={price} id={_id}/>
+                          <CheckOut amount={price} totalAmount={totalAmount} id={_id}/>
                         </Elements>
                       </div>
                     </Modal.Body>
