@@ -1,6 +1,7 @@
 import { FaArrowRight, FaArrowRightArrowLeft } from "react-icons/fa6";
 import bannerImg from "../../assets/banner.png";
 import bannerShape from "../../assets/bannerShap.png";
+import { Link } from "react-router-dom";
 const Banner = () => {
   return (
     <div className=" flex md:flex-row flex-col-reverse justify-between items-center container mx-auto gap-5 lg:gap-10 px-4 pt-10 z-10 mt-24">
@@ -17,7 +18,7 @@ const Banner = () => {
           can meet your needs!
         </p>
         <button className="btn bg-blue-950 text-white px-5 py-3 text-xl flex items-center gap-3 rounded-full">
-          Adopt Now <FaArrowRight></FaArrowRight>{" "}
+        <Link to='/petlisting' className="flex items-center gap-3">  Adopt Now <FaArrowRight></FaArrowRight>{" "}</Link>
         </button>
       </div>
 

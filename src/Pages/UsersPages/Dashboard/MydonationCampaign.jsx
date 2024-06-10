@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import DynamicTitle from "../../../Components/HelmetForTitle/DynamicTitle";
 import { LuPauseOctagon } from "react-icons/lu";
 import { FiEdit } from "react-icons/fi";
-import { MdRemoveRedEye } from "react-icons/md";
+// import { MdRemoveRedEye } from "react-icons/md";
 import { FaPlay } from "react-icons/fa";
+// import ProgressBar from "@ramonak/react-progress-bar";
 import {
   Table,
   TableBody,
@@ -11,23 +12,26 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
-  Progress,
 } from "flowbite-react";
 import useDonation from "../../../hooks/useDonation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Context/authcontext/Authentication";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import usePayments from "../../../hooks/usePayments";
+import Showdonator from "../../../Components/Showdonator";
+import ProgressingBar from "../../../Components/ProgressingBar";
 
 const MydonationCampaign = () => {
   const { user } = useContext(AuthContext);
+
   const axiosSecure = useAxiosSecure();
+
   const [pauseStatus, setPauseStatus] = useState(true);
   const [campaignsData, refetch] = useDonation();
   const mydonationCampaign = campaignsData.filter(
     (data) => data.user === user?.email
   );
-  console.log(pauseStatus);
   const handleIsPause = async (id) => {
     setPauseStatus(!pauseStatus);
     console.log("clicked");
@@ -58,6 +62,7 @@ const MydonationCampaign = () => {
     refetch();
   };
 
+  // calculate total amount of donation
   return (
     <div>
       <DynamicTitle title="DashBoard | My Donation Campaign"></DynamicTitle>
@@ -84,8 +89,7 @@ const MydonationCampaign = () => {
                   </TableCell>
                   <TableCell>${data.totalAmount}</TableCell>
                   <TableCell>
-                    {" "}
-                    <Progress progress={45} size="lg" />
+                    <ProgressingBar id={data._id} totalAmount={data.totalAmount}></ProgressingBar>
                   </TableCell>
                   <TableCell>
                     <div className="flex md:flex-row flex-col gap-3 text-xl">
@@ -105,9 +109,7 @@ const MydonationCampaign = () => {
                           <FaPlay></FaPlay>
                         )}
                       </button>
-                      <button className="btn text-white px-3 py-2 rounded-full bg-blue-900">
-                        <MdRemoveRedEye></MdRemoveRedEye>{" "}
-                      </button>
+                      <Showdonator id={data._id}></Showdonator>
                     </div>
                   </TableCell>
                 </TableRow>
