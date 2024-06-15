@@ -244,7 +244,7 @@ const Dashboard = () => {
       ) : (
         <>
           <Nav></Nav>
-          <div className="flex md:gap-10 font-sans bg-[#F6F6F6]">
+          <div className="flex md:gap-10 font-sans bg-[#F6F6F6] dark:bg-[#1f2937]">
             <div>
               <div
                 className={`w-72 min-h-screen bg-white ${

@@ -9,6 +9,7 @@ import { AuthContext } from "../../Context/authcontext/Authentication";
 import Swal from "sweetalert2";
 import {
   Avatar,
+  DarkThemeToggle,
   Dropdown,
   DropdownDivider,
   DropdownItem,
@@ -24,8 +25,7 @@ import { useTheme } from "../../Context/ThemeContext/ThemeProvider";
 const Nav = () => {
   // theme controller are here
 
-  const { theme, toggleTheme } = useTheme();
-
+ 
   const [isAdmin] = useAdmin();
   const { user, logOut } = useContext(AuthContext);
   // const [isOpen, setIsOpen] = useState(false);
@@ -44,9 +44,7 @@ const Nav = () => {
           };
         }}
         to="/"
-        className={`block py-2 px-3 ${
-          theme === "dark" ? "text-white" : "text-gray-700"
-        } rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
+        className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
       >
         Home
       </NavLink>
@@ -61,9 +59,7 @@ const Nav = () => {
           };
         }}
         to="/petlisting"
-        className={`block py-2 px-3 ${
-          theme === "dark" ? "text-white" : "text-gray-700"
-        } rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
+        className={`block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
       >
         Pet List
       </NavLink>
@@ -78,9 +74,7 @@ const Nav = () => {
           };
         }}
         to="/donation"
-        className={`block py-2 px-3 ${
-          theme === "dark" ? "text-white" : "text-gray-700"
-        } rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
+        className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
       >
         Donation
       </NavLink>
@@ -100,13 +94,7 @@ const Nav = () => {
   };
 
   return (
-    <Navbar
-      fluid
-      rounded
-      className={`container mx-auto ${
-        theme === "dark" ? "bg-[#070b1b]" : " bg-white"
-      }`}
-    >
+    <Navbar fluid rounded className={`container mx-auto `}>
       <NavbarBrand>
         <img src={logo} className="mr-3 h-24" alt="Flowbite React Logo" />
       </NavbarBrand>
@@ -140,23 +128,11 @@ const Nav = () => {
           </Dropdown>
         )}
 
-        <NavbarToggle />
-        <div className="ml-8">
-          <label className="switch">
-            <input
-              type="checkbox"
-              checked={theme === "dark"}
-              onChange={toggleTheme}
-            />
-            <span className="slider round"></span>
-          </label>
-        </div>
+       <div className="ml-5">
+       <DarkThemeToggle />
+       </div>
       </div>
-      <NavbarCollapse
-        className={`${theme === "dark" ? "text-white" : "text-blue-900"} `}
-      >
-        {navlink}
-      </NavbarCollapse>
+      <NavbarCollapse className=" text-blue-900">{navlink}</NavbarCollapse>
     </Navbar>
   );
 };
