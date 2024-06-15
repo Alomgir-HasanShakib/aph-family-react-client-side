@@ -22,6 +22,7 @@ const PetDetails = () => {
   const { id } = useParams();
   const pet = useLoaderData();
   const { name, category, _id, image, age } = pet;
+  console.log(pet);
   const { user } = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
 

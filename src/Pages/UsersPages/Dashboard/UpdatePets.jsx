@@ -13,7 +13,7 @@ import DynamicTitle from "../../../Components/HelmetForTitle/DynamicTitle";
 const UpdatePets = () => {
   const pet = useLoaderData();
   const { id } = useParams();
-  console.log(id);
+  console.log(pet);
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure()
   const { loader, setLoader, user } = useContext(AuthContext);

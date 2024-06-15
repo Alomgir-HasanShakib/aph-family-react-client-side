@@ -22,7 +22,7 @@ const DonationDetails = () => {
     image,
     isPause,
   } = donationData;
-  console.log(donationData);
+  console.log('donted====================',donationData);
   const [openModal, setOpenModal] = useState(false);
   const [amount, setAmount] = useState(null);
   const price = parseInt(amount);

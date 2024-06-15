@@ -45,7 +45,9 @@ const router = createBrowserRouter([
         path: "/donationDetails/:id",
         element: <DonationDetails></DonationDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/campaigns/${params.id}`),
+          fetch(
+            `https://aphfamily-alomgir-hasanshakibs-projects.vercel.app/campaigns/${params.id}`
+          ),
       },
       {
         path: "/petdetails/:id",
@@ -55,7 +57,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/pets/${params.id}`),
+          fetch(
+            `https://aphfamily-alomgir-hasanshakibs-projects.vercel.app/pets/${params.id}`
+          ),
       },
     ],
   },
@@ -88,13 +92,17 @@ const router = createBrowserRouter([
         path: "updatePet/:id",
         element: <UpdatePets></UpdatePets>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/pets/${params.id}`),
+          fetch(
+            `https://aphfamily-alomgir-hasanshakibs-projects.vercel.app/pets/${params.id}`
+          ),
       },
       {
         path: "updateCampaign/:id",
         element: <UpdateDonation></UpdateDonation>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/campaigns/${params.id}`),
+          fetch(
+            `https://aphfamily-alomgir-hasanshakibs-projects.vercel.app/campaigns/${params.id}`
+          ),
       },
       {
         path: "donationcampaign",

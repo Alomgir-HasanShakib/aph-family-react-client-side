@@ -7,10 +7,12 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Context/authcontext/Authentication";
 import DynamicTitle from "../../../Components/HelmetForTitle/DynamicTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AddPet = () => {
+  const { loader, setLoader, user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
-  const {loader,setLoader,user} = useContext(AuthContext)
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -35,7 +37,7 @@ const AddPet = () => {
     const formData = new FormData();
     formData.append("image", image);
 
-    setLoader(true)
+    setLoader(true);
     const imgRes = await axiosPublic.post(
       "https://api.imgbb.com/1/upload?key=015334421fc290847de066edce69a4c4",
       formData
@@ -53,9 +55,9 @@ const AddPet = () => {
         date: new Date(),
         adopted: false,
         long: long,
-        user: user?.email
+        user: user?.email,
       };
-      const petRes = await axiosPublic.post("/pets", result);
+      const petRes = await axiosSecure.post("/pets", result);
       if (petRes.data.insertedId) {
         reset();
         Swal.fire({
@@ -65,14 +67,14 @@ const AddPet = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        setLoader(false)
+        setLoader(false);
       }
     }
   };
 
   return (
     <div className="px-4 mt-24 md:mb-5">
-      <DynamicTitle title='DashBoard | Add Pet'></DynamicTitle>
+      <DynamicTitle title="DashBoard | Add Pet"></DynamicTitle>
       <Title
         head="List Down Here for give them better life"
         subHead="Have Any Pet ?"

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import { LuLogOut } from "react-icons/lu";
@@ -19,8 +19,13 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import useAdmin from "../../hooks/useAdmin";
+import { useTheme } from "../../Context/ThemeContext/ThemeProvider";
 
 const Nav = () => {
+  // theme controller are here
+
+  const { theme, toggleTheme } = useTheme();
+
   const [isAdmin] = useAdmin();
   const { user, logOut } = useContext(AuthContext);
   // const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +44,9 @@ const Nav = () => {
           };
         }}
         to="/"
-        className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+        className={`block py-2 px-3 ${
+          theme === "dark" ? "text-white" : "text-gray-700"
+        } rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
       >
         Home
       </NavLink>
@@ -54,7 +61,9 @@ const Nav = () => {
           };
         }}
         to="/petlisting"
-        className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+        className={`block py-2 px-3 ${
+          theme === "dark" ? "text-white" : "text-gray-700"
+        } rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
       >
         Pet List
       </NavLink>
@@ -69,7 +78,9 @@ const Nav = () => {
           };
         }}
         to="/donation"
-        className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+        className={`block py-2 px-3 ${
+          theme === "dark" ? "text-white" : "text-gray-700"
+        } rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
       >
         Donation
       </NavLink>
@@ -89,8 +100,14 @@ const Nav = () => {
   };
 
   return (
-    <Navbar fluid rounded className="container mx-auto">
-      <NavbarBrand href="www.google.com">
+    <Navbar
+      fluid
+      rounded
+      className={`container mx-auto ${
+        theme === "dark" ? "bg-[#070b1b]" : " bg-white"
+      }`}
+    >
+      <NavbarBrand>
         <img src={logo} className="mr-3 h-24" alt="Flowbite React Logo" />
       </NavbarBrand>
       <div className="flex md:order-2">
@@ -122,9 +139,24 @@ const Nav = () => {
             <DropdownItem onClick={handleLogOut}>Sign out</DropdownItem>
           </Dropdown>
         )}
+
         <NavbarToggle />
+        <div className="ml-8">
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={theme === "dark"}
+              onChange={toggleTheme}
+            />
+            <span className="slider round"></span>
+          </label>
+        </div>
       </div>
-      <NavbarCollapse>{navlink}</NavbarCollapse>
+      <NavbarCollapse
+        className={`${theme === "dark" ? "text-white" : "text-blue-900"} `}
+      >
+        {navlink}
+      </NavbarCollapse>
     </Navbar>
   );
 };
