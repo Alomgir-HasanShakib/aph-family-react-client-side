@@ -22,18 +22,15 @@ const DonationDetails = () => {
     image,
     isPause,
   } = donationData;
-  console.log('donted====================',donationData);
+  // console.log('donted====================',donationData);
   const [openModal, setOpenModal] = useState(false);
   const [amount, setAmount] = useState(null);
   const price = parseInt(amount);
 
-  // Make sure to call `loadStripe` outside of a component’s render to avoid
-  // recreating the `Stripe` object on every render.
   const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
-
   return (
-    <div>
+    <div >
       <DynamicTitle title="Donation Details"></DynamicTitle>
       <div className="bg-[#FCEED5] h-[300px] flex items-center justify-center mb-24">
         <div className="container mx-auto">
@@ -80,7 +77,9 @@ const DonationDetails = () => {
                     show={openModal}
                     onClose={() => setOpenModal(false)}
                   >
-                    <Modal.Header>Please Donate less Then ${totalAmount}</Modal.Header>
+                    <Modal.Header>
+                      Please Donate less Then ${totalAmount}
+                    </Modal.Header>
                     <Modal.Body>
                       <div className="space-y-6">
                         <form onChange={(e) => setAmount(e.target.value)}>
@@ -100,7 +99,11 @@ const DonationDetails = () => {
                           </div>
                         </form>
                         <Elements stripe={stripePromise}>
-                          <CheckOut amount={price} totalAmount={totalAmount} id={_id}/>
+                          <CheckOut
+                            amount={price}
+                            totalAmount={totalAmount}
+                            id={_id}
+                          />
                         </Elements>
                       </div>
                     </Modal.Body>

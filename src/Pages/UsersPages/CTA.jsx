@@ -12,8 +12,7 @@ const CTA = () => {
           </h2>
 
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 md:text-gray-400">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Consectetur obcaecati odio
+            Subscribe For More Update when new pet added
           </p>
         </div>
       </div>

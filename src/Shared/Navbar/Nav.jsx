@@ -128,9 +128,9 @@ const Nav = () => {
           </Dropdown>
         )}
 
-       <div className="ml-5">
+       {/* <div className="ml-5">
        <DarkThemeToggle />
-       </div>
+       </div> */}
       </div>
       <NavbarCollapse className=" text-blue-900">{navlink}</NavbarCollapse>
     </Navbar>

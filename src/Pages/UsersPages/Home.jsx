@@ -1,6 +1,8 @@
 import Banner from "../../Components/Banner/Banner";
 import DynamicTitle from "../../Components/HelmetForTitle/DynamicTitle";
 import PetCategory from "../../Components/PetCategory/PetCategory";
+import Partner from "../../Components/ourPartner/Partner";
+import Team from "../../Components/ourTeam/Team";
 import CTA from "./CTA";
 
 const Home = () => {
@@ -14,6 +16,8 @@ const Home = () => {
       <PetCategory></PetCategory>
 
       <CTA></CTA>
+      <Partner></Partner>
+      <Team></Team>
     </>
   );
 };

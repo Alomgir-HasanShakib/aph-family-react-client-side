@@ -130,7 +130,7 @@ const AllPets = () => {
         </h2>
       </div>
 
-      <div className="overflow-x-scroll max-w-[90%]">
+      <div className="overflow-x-scroll max-w-[90%] ">
         <DataTable
           columns={columns}
           data={pets}
@@ -139,6 +139,7 @@ const AllPets = () => {
           paginationIconFirstPage
           paginationIconLastPage
           responsive
+          className="dark:bg-gray-800 bg-black"
         />
       </div>
     </>

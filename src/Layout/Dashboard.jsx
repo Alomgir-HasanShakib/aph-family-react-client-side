@@ -243,7 +243,7 @@ const Dashboard = () => {
         </div>
       ) : (
         <>
-          <Nav></Nav>
+          {/* <Nav></Nav> */}
           <div className="flex md:gap-10 font-sans bg-[#F6F6F6] dark:bg-[#1f2937]">
             <div>
               <div
@@ -267,7 +267,7 @@ const Dashboard = () => {
                 </ul>
               </div>
             </div>
-            <div className={`flex-1 ${isOpen ? "hidden" : ""} `}>
+            <div className={`flex-1 ${isOpen ? "hidden" : ""} overflow-x-auto`}>
               <Outlet></Outlet>
             </div>
           </div>
