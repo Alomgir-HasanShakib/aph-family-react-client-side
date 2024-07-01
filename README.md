@@ -12,6 +12,10 @@
 
 ### Aph Family is dedicated to promoting pet adoption and supporting charitable efforts through an accessible online platform. By leveraging a robust technology stack and offering intuitive features, it ensures a positive experience for both users and administrators, fostering a supportive community for pet adoption and charitable giving.
 
-
+### If you want to run this project locally so you need to follow those step.
+- clone this project then open your code editor and then type this line in your terminal
+  ```node
+  npm install
+  npm run dev
 ### Live Link - https://aph-pet-family.web.app
 ### Server Side - Repository Link https://github.com/Alomgir-HasanShakib/aph-family-server-side
