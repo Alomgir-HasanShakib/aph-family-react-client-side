@@ -12,5 +12,5 @@
 
 ### Aph Family is dedicated to promoting pet adoption and supporting charitable efforts through an accessible online platform. By leveraging a robust technology stack and offering intuitive features, it ensures a positive experience for both users and administrators, fostering a supportive community for pet adoption and charitable giving.
 <hr/>
-### Live Link- https://aph-pet-family.web.app
-### Server Side Repository LINk - https://github.com/Alomgir-HasanShakib/aph-family-server-side
+### Live Link https://aph-pet-family.web.app
+### Server Side Repository Link https://github.com/Alomgir-HasanShakib/aph-family-server-side
