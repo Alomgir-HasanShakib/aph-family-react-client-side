@@ -1,4 +1,6 @@
-## Aph Family is a user-friendly platform designed to streamline pet adoption and facilitate charitable contributions. Utilizing advanced technology such as React.js, Node.js/Express.js, MongoDB, and Firebase, the platform offers a seamless and efficient user experience. ### Key features include:
+## Aph Family is a user-friendly platform designed to streamline pet adoption and facilitate charitable contributions. Utilizing advanced technology such as React.js, Node.js/Express.js, MongoDB, and Firebase, the platform offers a seamless and efficient user experience. 
+
+### Key features include
 
 - Category Filtering and Search: Users can easily browse pets by categories (e.g., dogs, cats) and search for specific pets by name, making the adoption process straightforward and personalized.
 
